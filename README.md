@@ -14,6 +14,16 @@ PVEASS (Proxmox Virtual Environment Assistant) is a powerful, web-based applicat
 
 In mission-critical environments, downtime is not an option. PVEASS helps administrators build and maintain standby failover servers, ensuring business continuity and minimizing downtime during unexpected failures.
 
+## System Requirements
+
+To ensure optimal performance and a smooth user experience, please ensure your system meets the following minimum requirements:
+
+* **OS**: Ubuntu Server
+* **CPU**: 2 Cores
+* **RAM**: 8 GB
+* **Storage**: 20 GB of free disk space
+* **Network**: A stable and fast network connection for efficient data transfer and communication with Proxmox hosts.
+
 ## Technology Stack
 
 * **Core**: PHP, SQLite, JavaScript, HTML, CSS
@@ -22,56 +32,37 @@ In mission-critical environments, downtime is not an option. PVEASS helps admini
 
 ---
 
-## Deployment with Docker
+## Getting Started
 
-PVEASS is designed to be easily deployed as a Docker container. You have two main options for deployment: using the pre-built image from Docker Hub or building the image yourself.
+This guide will walk you through the process of setting up and running PVEASS using a pre-built Docker image. This is the recommended method for quick and easy deployment. 
 
-### Option 1: Using the Pre-built Docker Image (Recommended)
-
-This is the simplest way to get started. Just pull the official image from Docker Hub and run it.
+### How to Install and Run
 
 1.  **Pull the Image**:
+    Pull the official PVEASS image from Docker Hub.
     ```bash
     docker pull sumanraic001/pveass:1.0.0
     ```
 
 2.  **Run the Container**:
+    Run the container with a persistent volume to ensure your configuration and database are saved.
     ```bash
     docker run -p 8080:80 -v $(pwd)/db:/var/www/html/db sumanraic001/pveass:1.0.0
     ```
-    * The `-p 8080:80` flag maps the container's port 80 to your host's port 8080.
-    * The `-v $(pwd)/db:/var/www/html/db` flag creates a persistent volume for the SQLite database, ensuring your data is saved even if the container is removed.
+    * The `-p 8080:80` flag maps the container's internal web server port (80) to port 8080 on your host machine.
+    * The `-v $(pwd)/db:/var/www/html/db` flag creates a data volume, so all your application data (like the SQLite database) will persist even if the container is stopped or removed.
 
 3.  **Access the Application**:
-    Open your web browser and navigate to `http://localhost:8080` to start using PVEASS.
+    Once the container is running, open your web browser and navigate to `http://localhost:8080` to begin using PVEASS.
 
-### Option 2: Building the Image Locally
+### Using Docker Compose (Recommended for Management)
 
-If you prefer to build the Docker image from the source code yourself, follow these steps.
-
-1.  **Build the Image**:
-    Navigate to the root directory of the project and build the Docker image.
-    ```bash
-    docker build -t pveass:local .
-    ```
-
-2.  **Run the Container**:
-    You can run the container with a persistent volume to save your data.
-    ```bash
-    docker run --rm -p 8080:80 -v $(pwd)/db:/var/www/html/db pveass:local
-    ```
-
-3.  **Access the Application**:
-    Visit `http://localhost:8080` in your web browser.
-
-### Using Docker Compose (Recommended for Development)
-
-For a more streamlined setup, use the provided `docker-compose.yml` file.
+For a more streamlined setup and management, use the provided `docker-compose.yml` file.
 
 1.  **Start the Service**:
-    From the project's root directory, simply run the compose command. The `--build` flag will build the image if it doesn't already exist.
+    From the project's root directory, simply run the compose command.
     ```bash
-    docker compose up -d --build
+    docker compose up -d
     ```
 
 2.  **View Logs (Optional)**:
