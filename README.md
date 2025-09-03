@@ -55,22 +55,6 @@ This guide will walk you through the process of setting up and running PVEASS us
 3.  **Access the Application**:
     Once the container is running, open your web browser and navigate to `http://localhost:8080` to begin using PVEASS.
 
-### Using Docker Compose (Recommended for Management)
-
-For a more streamlined setup and management, use the provided `docker-compose.yml` file.
-
-1.  **Start the Service**:
-    From the project's root directory, simply run the compose command.
-    ```bash
-    docker compose up -d
-    ```
-
-2.  **View Logs (Optional)**:
-    You can view the container's logs to troubleshoot or monitor its status.
-    ```bash
-    docker compose logs -f
-    ```
-
 ---
 
 ## Creator Information
