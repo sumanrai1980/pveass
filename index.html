@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PVEASS Tutorial</title>
+    <style>
+        img {
+            max-width: 600px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .screenshot {
+            text-align: left;
+            margin: 20px 0;
+        }
+        .screenshot p {
+            font-size: 14px;
+            color: #555;
+            margin-top: 8px;
+        }
+        .screenshot a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; color: #333; margin: 20px;">
+
+    <!-- Page Title -->
+    <h1 style="text-align: center; color: #2c3e50;">PVEASS Tutorial</h1>
+
+    <!-- Description -->
+    <p style="font-size: 16px; line-height: 1.6; max-width: 900px; margin: 0 auto;">
+        Welcome to the PVEASS tutorial. This guide will walk you through the steps to set up and use PVEASS effectively.
+    </p>
+
+    <hr style="margin: 30px 0;">
+
+    <!-- Table of Contents -->
+    <h2 style="color: #2980b9;">Table of Contents</h2>
+    <ul style="font-size: 16px; line-height: 1.8;">
+        <li><strong>DR Sites</strong>
+            <ul>
+                <li><a href="#dr-add-site" style="color: #2980b9; text-decoration: none;">Add DR Site</a></li>
+                <li><a href="#dr-associate-pbs" style="color: #2980b9; text-decoration: none;">Associate Proxmox Backup Server</a></li>
+                <li><a href="#dr-create-zfs" style="color: #2980b9; text-decoration: none;">Create ZFS in DR Site</a></li>
+                <li><a href="#dr-add-tokens" style="color: #2980b9; text-decoration: none;">Add API Tokens</a></li>
+                <li><a href="#dr-restore-vm" style="color: #2980b9; text-decoration: none;">Restore VM/Container in DR Site</a></li>
+            </ul>
+        </li>
+        <li><strong>How to in Proxmox VE</strong>
+            <ul>
+                <li><a href="#pve-api-token" style="color: #2980b9; text-decoration: none;">Creating API Token and assigning Permission</a></li>
+                <li><a href="#pve-datastore" style="color: #2980b9; text-decoration: none;">Creating Datastore in Proxmox Backup Server</a></li>
+                <li><a href="#pve-view-storage" style="color: #2980b9; text-decoration: none;">View mounted Storage (PBS for Backup) and ZFS (for VM/Container) in DR Site</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <hr style="margin: 30px 0;">
+
+    <!-- DR Sites Section -->
+    <h2 id="dr-sites" style="color: #2c3e50;">DR Sites</h2>
+
+    <h3 id="dr-add-site" style="color: #2980b9;">1) Add DR Site</h3>
+    <p>To add a new DR Site, open the PVEASS dashboard and navigate to the "DR Sites" section.</p>
+    <div class="screenshot">
+        <a href="screenshots/add-dr-site.png" target="_blank">
+            <img src="screenshots/add-dr-site.png" alt="Add DR Site Screenshot">
+        </a>
+        <p>Screenshot 1: Adding a new DR Site</p>
+    </div>
+    <p>After filling in the details, click <strong>Add DR Site</strong>. The new DR Site will now appear in the list.</p>
+
+    <h3 id="dr-associate-pbs" style="color: #2980b9;">2) Associate Proxmox Backup Server</h3>
+    <p>Associate your DR Site with a Proxmox Backup Server (PBS) to enable restore from backup.</p>
+    <div class="screenshot">
+        <a href="screenshots/associate-pbs.png" target="_blank">
+            <img src="screenshots/associate-pbs.png" alt="Associate PBS Screenshot">
+        </a>
+        <p>Screenshot 2: Associating PBS with DR Site</p>
+    </div>
+
+    <h3 id="dr-create-zfs" style="color: #2980b9;">3) Create ZFS in DR Site</h3>
+    <p>In the DR Site, create a ZFS storage pool to store VM and container data.</p>
+    <div class="screenshot">
+        <a href="screenshots/create-zfs-storage.png" target="_blank">
+            <img src="screenshots/create-zfs-storage.png" alt="Create ZFS Screenshot">
+        </a>
+        <p>Screenshot 3: Creating ZFS in DR Site</p>
+    </div>
+
+    <h3 id="dr-add-tokens" style="color: #2980b9;">4) Add API Tokens</h3>
+    <p>Generate API Token ID and Secret in Proxmox VE and add API tokens for secure communication between DR Site and PBS.</p>
+    <div class="screenshot">
+        <a href="screenshots/add-dr-site-token.png" target="_blank">
+            <img src="screenshots/add-dr-site-token.png" alt="Add API Tokens Screenshot">
+        </a>
+        <p>Screenshot 4: Adding API Tokens</p>
+    </div>
+
+    <h3 id="dr-restore-vm" style="color: #2980b9;">5) Restore VM/Container in DR Site</h3>
+    <p>Use the Restoration option to bring back a VM or container from backup.</p>
+    <div class="screenshot">
+        <a href="screenshots/restore-site.png" target="_blank">
+            <img src="screenshots/restore-site.png" alt="Restore VM Screenshot">
+        </a>
+        <p>Screenshot 5: Restoring a VM in DR Site</p>
+    </div>
+
+    <hr style="margin: 30px 0;">
+
+    <!-- Proxmox VE Section -->
+    <h2 id="pve" style="color: #2c3e50;">How to in Proxmox VE</h2>
+
+    <h3 id="pve-api-token" style="color: #2980b9;">1) Creating API Token and assigning Permission</h3>
+    <p>In Proxmox VE, create an API token under Datacenter → Permissions → API Tokens.</p>
+    <div class="screenshot">
+        <a href="screenshots/create-pve-token.png" target="_blank">
+            <img src="screenshots/create-pve-token.png" alt="API Token Screenshot">
+        </a>
+        <p>Screenshot 6: Creating API Token in Proxmox VE</p>
+    </div>
+
+    <h3 id="pve-datastore" style="color: #2980b9;">2) Creating Datastore in Proxmox Backup Server</h3>
+    <p>In PBS, create a new datastore to hold VM/container backups.</p>
+    <div class="screenshot">
+        <a href="screenshots/create-datastore.png" target="_blank">
+            <img src="screenshots/create-datastore.png" alt="Datastore Screenshot">
+        </a>
+        <p>Screenshot 7: Creating datastore in PBS</p>
+    </div>
+
+    <h3 id="pve-view-storage" style="color: #2980b9;">3) View mounted Storage (PBS for Backup) and ZFS (for VM/Container) in DR Site</h3>
+    <p>In the DR Site host, verify that PBS is mounted for backups and ZFS and PBS Storage are available for VM/Container storage and Restoration.</p>
+    <div class="screenshot">
+        <a href="screenshots/view-backups.png" target="_blank">
+            <img src="screenshots/view-backups.png" alt="View Storage Screenshot">
+        </a>
+        <p>Screenshot 8: Viewing mounted storage in DR Site</p>
+    </div>
+
+    <hr style="margin: 30px 0;">
+
+    <!-- Footer -->
+    <p style="text-align: center; font-size: 14px; color: #888;">
+        © 2025 PVEASS
+    </p>
+
+</body>
+</html>
