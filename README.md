@@ -57,6 +57,13 @@ This guide will walk you through the process of setting up and running PVEASS us
 
 ---
 
+## 📖 Tutorial
+
+A step-by-step **Tutorial Guide** with screenshots is available inside the repository under the [`Tutorial`](Tutorial/) folder.  
+Open [`index.html`](Tutorial/index.html) in your browser to start the guide.
+
+---
+
 ## Creator Information
 
 * **Created by**: Suman Rai
