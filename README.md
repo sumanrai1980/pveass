@@ -2,6 +2,9 @@
 
 PVEASS (Proxmox Virtual Environment Assistant) is a powerful, web-based application designed to simplify disaster recovery and failover management in **Proxmox Virtual Environment (PVE)**. Built with user-friendliness and automation in mind, PVEASS empowers Proxmox administrators to prepare, manage, and recover their infrastructure with ease.
 
+<!-- Dashboard Screenshot -->
+![PVEASS Dashboard](Tutorial/screenshots/dashboard.png)
+
 ## Key Features
 
 * **Seamless Integration with Proxmox**: Add failover sites and hosts effortlessly using an API Token and API Token Secret.
